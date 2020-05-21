@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Nueva Categoria</h1>
+
+		<div class="card">
+			<div class="card-header">Registro de nueva categoria</div>
+			<div class="card-body">
+
+				<form th:action="@{/categoria/save}" th:object="${categoria}"
+					method="post">
+					<div class="form-group">
+						<label for="id">Codigo :</label> <input type="text"
+							class="form-control" placeholder="Codigo de la categoria"
+							th:field="*{id}">
+					</div>
+					<div class="form-group">
+						<label for="nombre">Nombre :</label> <input type="text"
+							class="form-control" placeholder="Nombre de la categoria"
+							th:field="*{nombre}">
+					</div>
+					<div class="form-group">
+						<label for="estado">Estado :</label> <select th:field="*{estado}"
+							class="form-control">
+							<option th:value="A" th:text="A"></option>
+							<option th:value="I" th:text="I"></option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save"></i> Grabar
+					</button>
+					<a th:href="@{/categoria}" class="btn btn-danger"> <i
+						class="fas fa-undo"></i> Cancelar
+					</a>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

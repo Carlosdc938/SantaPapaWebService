@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragmen="head">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Human Resource Project">
+<meta name="author" content="Juan Flores-Moroco">
+
+<title>Santa Papa Web Service</title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/chosen.min.css}">
+<link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/solid.min.css}">
+</head>
+<body>
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" th:href="@{/}"><i class="fas fa-users"></i> Papita</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a
+						class="nav-link" th:href="@{/producto}"> <i
+							class="fas fa-box-open"></i> Productos
+					</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"class="nav-item"><a
+						class="nav-link" th:href="@{/usuario/trabajador}"> <i
+							class="fas fa-user"></i> Vendedores
+					</a></li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TRABAJADOR')" class="nav-item"><a
+						class="nav-link" th:href="@{/categoria}"> <i
+							class="fas fa-calendar-check"></i> Categorias
+					</a></li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TRABAJADOR')" class="nav-item"><a
+						class="nav-link" th:href="@{/proveedor}"> <i
+							class="fas fa-user-tie"></i> Proveedores
+					</a></li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TRABAJADOR')" class="nav-item"><a
+						class="nav-link" th:href="@{/venta}"> <i
+							class="fas fa-receipt"></i> Ventas
+					</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"class="nav-item"><a
+						class="nav-link" th:href="@{/producto/productosmayor}"> <i
+							class="fas fa-box-open"></i> Productos Mayor Vendidos
+					</a></li>
+					<li sec:authorize="hasRole('ROLE_CLIENTE')" class="nav-item"><a class="nav-link" th:href="@{/vender}">
+							<i class="fas fa-shopping-cart"></i> Comprar
+					</a></li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TRABAJADOR')" class="nav-item"><a class="nav-link" th:href="@{/vender}">
+							<i class="fas fa-shopping-cart"></i> Vender
+					</a></li>
+					<li sec:authorize="hasRole('ROLE_CLIENTE')" class="nav-item"><a
+						class="nav-link" th:href="@{/usuario/verid}"> <i class="fas fa-home"></i> Mis compras
+					</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a
+						class="nav-link" th:href="@{/usuario/registercliente}"> <i
+							class="fas fa-user-circle"></i> Register
+					</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a
+						class="nav-link" th:href="@{/login}"> <i
+							class="fas fa-user-circle"></i> Sign In
+					</a></li>
+					<li sec:authorize="isAuthenticated()" class="nav-item"><a
+						class="nav-link" th:href="@{/logout}"> <i
+							class="fas fa-sign-out-alt"></i> Sign Out
+					</a></li>
+				</ul>
+				<strong><span sec:authorize="isAuthenticated()"
+					th:text="${#authentication.getPrincipal().getNombres()}">
+						Juancito</span></strong>
+			</div>
+		</nav>
+	</header>
+	<div class="container-fluid">
+		<h1>Minimarket</h1>
+	</div>
+	<footer th:fragment="footer">
+		<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/chosen.jquery.min.js}"></script>
+		<script th:src="@{/js/fontawesome.min.js}"></script>
+		<script th:src="@{/js/sweetalert.min.js}"></script>
+	</footer>
+</body>
+</html>

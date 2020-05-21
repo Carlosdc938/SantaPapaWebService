@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Datos del Usuario</h1>
+		<p>
+			Id: <span th:text="${usuario.id}"></span>
+		</p>
+		<p>
+			Apellidos: <span th:text="${usuario.apellido}"></span>
+		</p>
+		<p>
+			Nombres: <span th:text="${usuario.nombre}"></span>
+		</p>
+		<p>
+			Username: <span th:text="${usuario.username}"></span>
+		</p>
+		<p>
+			Direccion: <span th:text="${usuario.direccion}"></span>
+		</p>
+		<p>
+			Telefono: <span th:text="${usuario.telefono}"></span>
+		</p>
+		<p>
+			Correo: <span th:text="${usuario.correo}"></span>
+		</p>
+		<div class="card text-center">
+			<div class="card-header">Mis compras</div>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Total</th>
+						<th scope="col">Productos</th>
+						<th scope="col">Comprobante</th>
+					</tr>
+				</thead>
+				<tbody th:each="venta: ${usuario.ventas}">
+					<tr>
+						<th scope="row" th:text="${venta.id}">1</th>
+						<td th:text="${venta.fechaYHora}">Mark</td>
+						<td th:text="${venta.total}">Otto</td>
+						<td>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Nombre</th>
+										<th>Codigo de producto</th>
+										<th>Cantidad vendida</th>
+										<th>Precio</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="producto : ${venta.productos}">
+										<td th:text="${producto.nombre}"></td>
+										<td th:text="${producto.codigo}"></td>
+										<td th:text="${producto.cantidad}"></td>
+										<td th:text="${producto.precio}"></td>
+										<td th:text="${producto.total}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td><a sec:authorize="hasRole('ROLE_CLIENTE')"
+							th:href="@{'/createPdfComprobante/'+${venta.id}}"
+							style="float: width;"><img th:src="@{/images/pdf-icon.jpg}"
+								style="width: 40px;"></a></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+
+		<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

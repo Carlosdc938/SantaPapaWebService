@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Protex">
+<meta name="author" content="Juan Flores-Moroco">
+
+<title>Log in</title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/solid.min.css}">
+<link rel="stylesheet" th:href="@{/css/signin.css}">
+</head>
+<body>
+
+	<div class="container text-center">
+		<form th:action="@{/signin}" class="form-signin" method="post">
+			<img class="mb-4" th:src="@{/images/logo-codeorg.png}" alt="logo" >
+			<h1 class="h3 mb-3 font-weight-normal"><i class="fas fa-user-circle"></i> Sign In</h1>
+
+			<div th:if="${param.error}" class="alert alert-danger">
+				Usuario y Contraseña invalidos
+			</div>
+			<div th:if="${param.logout}" class="alert alert-success">
+				Haz salido de forma correcta
+			</div>
+
+			<div class="input-group mb-3">
+  				<div class="input-group-prepend">
+    				<span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+  				</div>
+  				<input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Usuarios" 
+  					aria-describedby="basic-addon1" required autofocus>
+			</div>
+			<div class="input-group mb-3">
+  				<div class="input-group-prepend">
+    				<span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
+  				</div>
+  				<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Contraseña" 
+  					aria-describedby="basic-addon2" required>
+			</div>			
+			
+			<div class="checkbox mb-3 text-left">
+				<label> <input type="checkbox" id="checkRememberMe" name="checkRememberMe">
+					Recordar usuario
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+			<p class="mt-5 mb-3 text-muted">Universidad Privada del Norte &copy; 2019</p>
+		</form>
+	</div>
+
+	<footer>
+		<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/fontawesome.min.js}"></script>
+	</footer>
+</body>
+</html>

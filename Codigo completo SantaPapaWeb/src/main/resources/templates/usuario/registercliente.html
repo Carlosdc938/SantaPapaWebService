@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Nuevo cliente</h1>
+
+		<div class="card">
+			<div class="card-header">Registro de nuevo Cliente</div>
+			<div class="card-body">
+
+				<div th:if="${dangerRegister}" class="alert alert-danger" role="alert">
+  					<span th:text="${dangerRegister}"></span>
+				</div>
+
+				<form th:action="@{/usuario/savecliente}" th:object="${usuario}" 
+					method="post">
+					<div class="form-group">
+						<label for="username">Username:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Usuario"
+							th:field="*{username}">
+					</div>
+					<div class="form-group">
+						<label for="password">Password:</label> 
+						<input type="password" class="form-control" 
+							placeholder="Contraseña"
+							th:field="*{password}">
+					</div>
+					<div class="form-group">
+						<label for="nombres">Nombres:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Ingrese su Nombres"
+							th:field="*{nombre}">
+					</div>
+					<div class="form-group">
+						<label for="apellidos">Apellidos:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Ingrese su Apellidos"
+							th:field="*{apellido}">
+					</div>
+					<div class="form-group">
+						<label for="direccion">Direccion:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Direccion"
+							th:field="*{direccion}">
+					</div>
+					<div class="form-group">
+						<label for="telefono">Telefono:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Telefono"
+							th:field="*{telefono}">
+					</div>
+					<div class="form-group">
+						<label for="correo">Correo:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Correo"
+							th:field="*{correo}">
+					</div>					
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save"></i> Registrar
+					</button>
+					<a th:href="@{/}" class="btn btn-danger"> 
+						<i class="fas fa-undo"></i> Cancelar 
+					</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

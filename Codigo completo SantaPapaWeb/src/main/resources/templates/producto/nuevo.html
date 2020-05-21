@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Nuevo Producto</h1>
+		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+			th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+		</div>
+		<div class="card">
+			<div class="card-header">Registro de nuevo producto</div>
+			<div class="card-body">
+
+				<form th:action="@{/producto/save}" th:object="${producto}"
+					method="post">
+					<div class="form-group">
+						<label for="nombre">Nombre :</label> <input type="text"
+							class="form-control"
+							placeholder="Nombre de Producto" th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+					</div>
+					
+					<div class="form-group">
+						<label for="codigo">Codigo :</label> <input type="text"
+							class="form-control"
+							placeholder="Codigo de Producto" th:field="*{codigo}" th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''">
+					</div>
+					<div class="form-group">
+						<label for="categoria">Categoria :</label> <select
+							th:field="*{categoria}" class="form-control">
+							<option th:each="categoria : ${categorias}"
+								th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="stock">Stock :</label> <input type="text"
+							class="form-control" placeholder="Stock" th:field="*{stock}">
+					</div>
+					<div class="form-group">
+						<label for="precio">Precio :</label> <input type="text"
+							class="form-control" placeholder="Precio del producto"
+							th:field="*{precio}">
+					
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save"></i> Grabar
+					</button>
+					<a th:href="@{/producto}" class="btn btn-danger"> <i
+						class="fas fa-undo"></i> Cancelar
+					</a>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

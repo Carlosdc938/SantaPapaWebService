@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Informacion de la Categoria</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Informacion de la Categoria</div>
+			<div class="card-body">
+
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+					<span th:text="${dangerDel}"></span>
+				</div>
+				<form>
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Nombre
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.nombre}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="estado" class="col-sm-2 col-form-label">Estado
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.estado}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fechaCreacion" class="col-sm-2 col-form-label">Fecha de Creacion
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.fechaCreacion}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="horaCreacion" class="col-sm-2 col-form-label">Hora de Creacion
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.horaCreacion}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="precio" class="col-sm-2 col-form-label">Usuario de Creacion
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.usuarioCreacion}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fechaActualizacion" class="col-sm-2 col-form-label">Fecha de Actualizacion
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.fechaActualizacion}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="usuarioActualizacion" class="col-sm-2 col-form-label">Usuario de Actualizacion
+							:</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${categoria.usuarioActualizacion}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{/categoria}" class="btn btn-success"><i
+					class="fas fa-file-alt"></i> Atras</a>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
+
+
+
+
+
+

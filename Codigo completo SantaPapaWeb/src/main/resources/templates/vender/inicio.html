@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h2>Vender</h2>
+		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+			th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+		</div>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Codigo</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+						<th>Quitar de lista</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="producto, iterador : ${session.carrito}">
+						<td th:text="${producto.nombre}"></td>
+						<td th:text="${producto.codigo}"></td>
+						<td th:text="${producto.precio}"></td>
+						<td th:text="${producto.cantidad}"></td>
+						<td th:text="${producto.total}"></td>
+						<td>
+							<form th:action="@{/vender/quitar/} + ${iterador.index}"
+								method="post">
+								<button type="submit" class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<h1 th:text="${'Total: ' + total}"></h1>
+		<form class="mb-2" th:action="@{/vender/terminar}" method="post">
+			<button type="submit" class="btn btn-success">
+				Terminar Venta&nbsp;<i class="fa fa-check"></i>
+			</button>
+			<a th:href="@{/vender/limpiar}" class="btn btn-danger">Cancelar
+				venta&nbsp;<i class="fa fa-trash"></i>
+			</a> <a th:href="@{/}" class="btn btn-danger"> <i class="fas fa-undo"></i>
+				Regresar Al Menu
+			</a> <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TRABAJADOR')" th:href="@{/venta}" class="btn btn-warning"> <i
+				class="fas fa-undo"></i> Ver ventas
+			</a>
+			<a sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/usuario/verid}" class="btn btn-warning"> <i
+				class="fas fa-undo"></i> Mis compras
+			</a>
+		</form>
+		
+		<div class="card text-center">
+			<div class="card-header">Lista de Productos</div>
+			<div class="card-body">
+
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+					<span th:text="${dangerDel}"></span>
+				</div>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Codigo</th>
+							<th scope="col">Categoria</th>
+							<th scope="col">Stock</th>
+							<th scope="col">Precio</th>
+							<th scope="col">Agregar carrito</th>
+						</tr>
+					</thead>
+					<tbody th:each="producto: ${productos}">
+						<tr>
+							<th scope="row" th:text="${producto.id}">1</th>
+							<td th:text="${producto.nombre}">Mark</td>
+							<td th:text="${producto.codigo}">Mark</td>
+							<td th:text="${producto.categoria.nombre}">Otto</td>
+							<td th:text="${producto.stock}">@mdo</td>
+							<td th:text="${producto.precio}">@mdo</td>
+							<td><a th:href="@{ '/vender/agregar/'+ ${producto.id} }" class="btn btn-info">
+									<i class="fas fa-plus"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

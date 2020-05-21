@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Lista de Trabajadores</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Lista de Trabajadores</div>
+			<div class="card-body">
+				
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+  					<span th:text="${dangerDel}"></span>
+				</div>
+			
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Username</th>
+							<th scope="col">Nombres</th>
+							<th scope="col">Apellidos</th>
+							<th scope="col">Direccion</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Correo</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody th:each="usuario: ${usuarios}">
+						<tr>
+							<th scope="row" th:text="${usuario.id}">1</th>
+							<td th:text="${usuario.username}">Mark</td>
+							<td th:text="${usuario.nombre}">Otto</td>
+							<td th:text="${usuario.apellido}">Otto</td>
+							<td th:text="${usuario.direccion}">Otto</td>
+							<td th:text="${usuario.telefono}">Otto</td>
+							<td th:text="${usuario.correo}">Otto</td>
+							<td>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/usuario/info/' + ${usuario.id} }"  class="btn btn-danger"> 
+									<i class="fas fa-trash-alt"></i> 
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/usuario/edit/' + ${usuario.id} }"  class="btn btn-danger"> 
+									<i class="fas fa-trash-alt"></i> 
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/usuario/del/' + ${usuario.id} }"  class="btn btn-danger"> 
+									<i class="fas fa-trash-alt"></i> 
+								</a>						
+							</td>
+						</tr>						
+					</tbody>
+				</table>
+
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{/usuario/register}" class="btn btn-primary"><i class="fas fa-file-alt"></i> Nuevo trabajador</a>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
